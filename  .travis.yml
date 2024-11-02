@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - 'v20.18.0'   #指定node版本
+branchs:
+  only:
+    - release/R202411_PRESENT
