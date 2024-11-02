@@ -1,6 +1,12 @@
 language: node_js
+
 node_js:
   - "20"
+
+branchs:
+  only:
+    - release/R202411_PRESENT
+
 addons:
   chrome: stable
 
