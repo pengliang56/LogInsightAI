@@ -5,7 +5,7 @@ node_js:
 
 branchs:
   only:
-    - "release/R202411_PRESENT"
+    - main
 
 cache:
   directories:
