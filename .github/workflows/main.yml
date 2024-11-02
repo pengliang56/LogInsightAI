@@ -27,15 +27,22 @@ jobs:
         run: ng build
 
       - name: Delete Existing Files
-        run : sudo sshpass -p ${{ secrets.SSH_PASSWORD }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} 'rm -rf /root/www/angular-app/*'
+        run : |
+          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no
+          ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} "bash -s" <<EOF
+          rm -rf /root/www/angular-app/*
+          EOF
 
       - name: Compress and Copy New Files to server
         run: |
           cd dist/ai_log/
           tar -czvf ../../ai_log.tar.gz ./
-          cd ..
-          cd ..
+          cd ../../
           sudo sshpass -p ${{ secrets.SSH_PASSWORD }} scp -v -o StrictHostKeyChecking=no -r ai_log.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }}:/root/www/angular-app/
 
       - name: Uncompress new Files
-        run : sudo sshpass -p ${{ secrets.SSH_PASSWORD }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} 'cd /root/www/angular-app/ && tar -xzvf ai_log.tar.gz && rm ai_log.tar.gz'
+        run : |
+          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no
+          ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} "bash -s" <<EOF
+          cd /root/www/angular-app/ && tar -xzvf ai_log.tar.gz && rm ai_log.tar.gz
+          EOF
