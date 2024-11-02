@@ -26,17 +26,20 @@ jobs:
       - name: Build Angular app
         run: ng build
 
-      - name: Remove Files on Nginx Server
-        uses: appleboy/ssh-action@v0.1.9
+      - name: Remove Files
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: rm -rf /var/www/html/front/*
+          script: |
+            whoami
+            ls -al
+            rm -rf /var/www/html/front/*
 
       - name: Deploy to Server
-        uses: appleboy/ssh-action@v0.1.9
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
