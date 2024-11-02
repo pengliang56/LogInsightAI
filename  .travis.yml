@@ -5,10 +5,7 @@ node_js:
 
 branchs:
   only:
-    - release/R202411_PRESENT
-
-addons:
-  chrome: stable
+    - "release/R202411_PRESENT"
 
 cache:
   directories:
