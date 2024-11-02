@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - "20"
+
+branchs:
+  only:
+    - "release/R202411_PRESENT"
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run test -- --no-watch --no-progress
