@@ -1,0 +1,56 @@
+<div class="container">
+  <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+      @for (control of controlArray; track control) {
+      <div nz-col [nzSpan]="8" [hidden]="!control.show">
+        <nz-form-item>
+          <nz-form-label [nzFor]="control.lableValue">{{
+            control.lableName
+          }}</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="placeholder"
+              [formControlName]="control.lableValue"
+              [attr.id]="control.lableValue"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      }
+    </div>
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button [nzType]="'primary'">Search</button>
+        <button nz-button (click)="resetForm()">Clear</button>
+        <a class="collapse" (click)="toggleCollapse()">
+          Collapse
+          <span nz-icon [nzType]="isCollapse ? 'down' : 'up'"></span>
+        </a>
+      </div>
+    </div>
+  </form>
+
+  <nz-collapse style="margin-top: 2rem">
+    @for (panel of panels; track panel) {
+    <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active">
+      @if (panel.childPanel && panel.childPanel.length > 0) {
+      <div>
+        <nz-collapse>
+          @for (childPanel of panel.childPanel; track childPanel) {
+          <nz-collapse-panel
+            [nzHeader]="childPanel.name"
+            [nzActive]="childPanel.active"
+          >
+            <code>
+              {{ childPanel.content }}
+            </code>
+          </nz-collapse-panel>
+          }
+        </nz-collapse>
+      </div>
+      }
+    </nz-collapse-panel>
+    }
+  </nz-collapse>
+</div>
