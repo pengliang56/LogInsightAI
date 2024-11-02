@@ -1,0 +1,38 @@
+name: CI Angular app through Github Actions
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - uses: srt32/git-actions@v0.0.3
+        with:
+          args: git submodule update --init --recursive
+
+      - name: use Node.js 20
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+        env:
+          CI: true
+
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.0.7
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-avz --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.MAC_IP }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.APP_PATH }}
