@@ -28,7 +28,7 @@ jobs:
 
       - name: Delete Existing Files
         run : |
-          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no
+          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} -v ssh -o StrictHostKeyChecking=no
           ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} "bash -s" <<EOF
           rm -rf /root/www/angular-app/*
           EOF
@@ -42,7 +42,7 @@ jobs:
 
       - name: Uncompress new Files
         run : |
-          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no
+          sudo sshpass -p ${{ secrets.SSH_PASSWORD }} -v ssh -o StrictHostKeyChecking=no
           ${{ secrets.SSH_USER }}@${{ secrets.MAC_IP }} "bash -s" <<EOF
           cd /root/www/angular-app/ && tar -xzvf ai_log.tar.gz && rm ai_log.tar.gz
           EOF
