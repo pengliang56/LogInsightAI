@@ -31,10 +31,11 @@ jobs:
       - name: Remove Files
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 8.138.13.106
+          host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          debug: true
           script: |
             whoami
             ls -al
