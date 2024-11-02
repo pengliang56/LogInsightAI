@@ -23,12 +23,11 @@ jobs:
         env:
           CI: true
 
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
+      - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avz --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.MAC_IP }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.APP_PATH }}
+          username: 'root'   #ssh user name
+          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
+          local_path: './dist/*'  # 对应我们项目build的文件夹路径
+          remote_path: '/root/www/angular-app'
