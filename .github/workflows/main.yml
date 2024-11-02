@@ -33,7 +33,8 @@ jobs:
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          #key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           debug: true
           script: |
