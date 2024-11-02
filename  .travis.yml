@@ -1,6 +1,15 @@
 language: node_js
 node_js:
-  - 'v20.18.0'   #指定node版本
-branchs:
-  only:
-    - release/R202411_PRESENT
+  - "20"
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run test -- --no-watch --no-progress
