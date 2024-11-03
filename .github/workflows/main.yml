@@ -36,10 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           debug: true
-          script: |
-            whoami
-            ls -al
-            rm -rf /var/www/html/front/*
+          script: rm -rf /var/www/html/front/*
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
@@ -50,4 +47,3 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: ${{ github.workspace }}/dist
           target: /var/www/html/front/
-          strip_components: 2
