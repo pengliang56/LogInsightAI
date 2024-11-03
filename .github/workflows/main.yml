@@ -48,3 +48,4 @@ jobs:
           source: ${{ github.workspace }}/dist
           target: /var/www/html/front/
           rm: true
+          strip_components: 3
