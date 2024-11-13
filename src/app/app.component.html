@@ -7,7 +7,7 @@
     [nzTrigger]="null">
     <div class="sidebar-logo">
       <a href="/" target="_blank">
-        <img src="https://ts1.cn.mm.bing.net/th?id=ODLS.81a5360f-c169-4a0e-9a59-1cea24ab6f97&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="logo">
+        <img src="http://localhost:4200/angular.svg" alt="logo">
         <h1>AI Log Demo</h1>
       </a>
     </div>
@@ -17,25 +17,26 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/list">Log List</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <!-- <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Workplace</a>
-          </li>
+          </li> -->
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <!-- <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a>Basic Form</a>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
+    <nz-header style="display: flex; justify-content: space-between; 
+    align-items: center; background-color: #fff;">
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
             <span class="trigger"
@@ -44,6 +45,12 @@
             ></span>
         </span>
       </div>
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" style="width: 20rem; padding-right: 40px;">
+        <input type="text" nz-input placeholder="input search text" />
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+      </ng-template>
     </nz-header>
     <nz-content>
       <div class="inner-content">

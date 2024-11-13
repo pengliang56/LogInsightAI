@@ -60,13 +60,9 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     let searchItems = [
-      { lableName: 'id', lableValue: 'log.id' },
-      { lableName: 'weight', lableValue: 'log.weight' },
-      { lableName: 'appcode', lableValue: 'log.appcode' },
-      { lableName: 'server', lableValue: 'log.server' },
-      { lableName: 'type', lableValue: 'log.type' },
-      { lableName: 'date', lableValue: 'log.date' },
-      { lableName: 'thread', lableValue: 'log.thread' },
+      { lableName: 'App Code', lableValue: 'log.appcode' },
+      { lableName: 'Server', lableValue: 'log.server' },
+      { lableName: 'Date', lableValue: 'log.date' },
     ];
     searchItems.map((item, i) => {
       const { lableName, lableValue } = item;
